@@ -1,0 +1,23 @@
+# fly.toml app configuration file generated for server-sgar on 2023-12-18T17:42:45Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "server-sgar"
+primary_region = "lhr"
+
+[build]
+command = "npm install && npm run seeds && npm run server:dev"
+
+[http_service]
+  internal_port = 9000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 1024
